@@ -12,7 +12,7 @@ class AbstractItem(core_models.TimeStampedModel):
     class Meta:
         abstract = True
 
-    def _str_(self):
+    def __str__(self):
         return self.name
 
 
