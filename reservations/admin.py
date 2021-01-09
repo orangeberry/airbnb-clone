@@ -7,5 +7,14 @@ class ReservationAdmin(admin.ModelAdmin):
 
     """ Reservation Admin Definiton """
 
+    list_display = (
+        "room",
+        "status",
+        "check_in",
+        "check_out",
+        "guest",
+        "in_progress",
+        "is_finished",
+    )
 
-# Register your models here.
+    list_filter = ("status",)
