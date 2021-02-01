@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth import password_validation
 from . import models
 
 
@@ -32,10 +33,11 @@ class SignUpForm(forms.ModelForm):
         password = self.cleaned_data.get("password")
         password1 = self.cleaned_data.get("password1")
 
-        if password != password1:
-            raise forms.ValidationError("Password Confirmation does not match")
-        else:
-            return password
+        if password:
+            try:
+                password_validation.validate_password(password, self.instance)
+            except forms.ValidationError as error:
+                self.add_error("password1", error)
 
     def save(self, *args, **kwargs):
         user = super().save(commit=False)
