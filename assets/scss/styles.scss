@@ -65,4 +65,28 @@
   }
 }
 
+.btn {
+  @apply w-full flex flex-col items-center border border-yellow-400 bg-yellow-400 text-center rounded-lg py-3 font-medium text-gray-700;
+}
+
+textarea {
+  resize: none;
+  height: 100px;
+}
+select {
+  height: 65px;
+}
+
+input,
+textarea,
+select {
+  @apply flex search-box items-center border py-2 pl-5 pr-3 rounded-3xl border-gray-200 w-72 text-sm font-medium placeholder-gray-700;
+  &:focus {
+    @apply outline-none;
+  }
+  &:hover {
+    @apply shadow-lg;
+  }
+}
+
 @tailwind utilities;

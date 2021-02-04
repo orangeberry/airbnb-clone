@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block page_title %}
+    Update {{user_obj.first_name}}'s profile
+{% endblock page_title %}
+    
+    
+    {% block search-bar %}
+    {% endblock search-bar %}
+        
+
+{% block content %}
+    <div class="container rounded-xl md:w-1/2 lg:w-5/12 xl:w-1/4 mx-auto my-10 flex flex-col items-center p-6 border border-gray-300">
+
+    {% include 'mixins/auth/auth_form_form.html' with form=form cta="Update Confirm" %}
+
+    <div class="mt-6 -mb-4 text-sm text-gray-400">
+        You are logged in as {{object.login_method}}.
+    </div>
+
+    <div class="mt-6">
+        <a href="{% url 'users:password' %}" class=" text-blue-400 font-medium">Change Password</a>
+    </div>
+    
+    {% if obj.login_method == "email" %}
+        <div class="mt-6">
+            <a href="{% url 'users:password' %}" class=" text-blue-400 font-medium">Change Password</a>
+        </div>
+    {% endif %}
+    
+
+    </div>
+{% endblock content %}

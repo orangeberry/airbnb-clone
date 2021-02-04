@@ -21,7 +21,12 @@
         <div>
             {% block search-bar %}
             <form method="GET" action="{% url "rooms:search" %}">
-                <input class="search-box border py-3 px-6 rounded-3xl border-gray-200 w-72 text-sm font-medium placeholder-gray-700 hover:shadow-lg focus:outline-none" name="city" placeholder="Search by City" />
+
+                <div class="flex items-center">
+                    <input class="py-3" name="city" placeholder="Start your search" /> 
+                    <i class="fas fa-search text-white bg-yellow-500 py-2 px-2 rounded-full -m-10"></i>
+                </div>
+                
             </form>
             {% endblock search-bar %}
         </div>
