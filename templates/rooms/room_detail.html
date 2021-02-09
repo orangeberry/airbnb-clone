@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load is_booked %}
+{% load is_booked i18n %}
 
 {% block page_title %}
     {{room.name}}
@@ -36,7 +36,7 @@
             <div class="flex justify-between">
                 <div>
                     <h4 class="text-2xl font-medium mb-px">{{room.room_type}} hosted by {{room.host}}</h4>
-                    <div class="flex border-b border-gray-300 pb-8 mt-2">
+                    <div class="flex border-b border-gray-300 pb-6 mt-2">
                         <span class="mr-1 font-light">
                             {{room.guests}} guest{{room.guests|pluralize}} ∙
                         </span>
@@ -54,6 +54,7 @@
                         </span>
                         
                     </div>
+                    <a class="btn block mt-6 mb-4" href="{% url 'lists:save-room' room.pk %}">{% trans 'Save room' %}</a>
                 </div>
 
                 <a href="{{room.host.get_absolute_url}}" class="flex flex-col items-center">
