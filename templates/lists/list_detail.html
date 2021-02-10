@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block page_title %}
+    {{user.first_name}}'s list
+{% endblock page_title %}
+        
+
+{% block content %}
+    
+    <div class=" h-75vh ">
+        <h3 class="text-2xl text-center font-semibold text-gray-800 mt-32 px-3 py-1">Saved Room List</h3>
+            <div class="container mx-auto pb-10 flex flex-col items-center">
+                <div class="flex flex-wrap w-full mb-10 mt-10">
+                    {% for room in user.list.rooms.all  %}
+                        {% include 'partials/room_card.html' with room=room %}
+                    {% endfor %}
+                </div>
+            </div>
+    </div>
+
+{% endblock content %}

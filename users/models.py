@@ -1,4 +1,5 @@
 import uuid
+from core import managers as core_managers
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
@@ -45,6 +46,8 @@ class User(AbstractUser):
         (LOGIN_GITHUB, "Github"),
         (LOGIN_KAKAO, "Kakao"),
     )
+
+    objects = core_managers.CustomUserManager()
 
     avatar = models.ImageField(upload_to="avatars", blank=True)
 

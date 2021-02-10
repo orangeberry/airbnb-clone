@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Conversation
+{% endblock page_title %}
+
+{% block search-bar %}
+{% endblock search-bar %}
+
+{% block content %}
+
+    <div class="container mx-auto my-10 mt-32 flex justify-between min-h-50vh">
+
+        <div class="border w-1/3 p-10 rounded-lg ml-16">
+            <span class="text-center w-full block text-lg font-medium btn bg-gray-100 border-gray-100">Conversation </span>
+            <div class="flex justify-between mt-10 items-center">
+                {% for user in conversation.participants.all  %}
+                    <div class="flex flex-col items-center -px-8">
+                        {% include "mixins/user_avatar.html" with user=user %}
+                        <span class="mt-2 text-gray-500">{{user.first_name}}</span>
+                    </div>
+                    {% if forloop.first %}
+                        <span class="font-medium text-2xl px-4">&</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="flex-grow">
+            <div class="border ml-10 p-10 flex flex-col rounded-lg w-8/12">
+                {% if conversation.messages.count == 0 %}
+                    no messages
+                {% else %}
+                    {% for message in conversation.messages.all  %}
+                        <div class="mb-10 {% if message.user.pk == user.pk %}
+                            self-end
+                            text-right
+                        {% endif %}">
+                            <span class="text-sm font-medium text-gray-600">{{message.user.first_name}}</span>
+                            <div class="mt-2 p-5 w-56 rounded
+                                {% if message.user.pk != user.pk %}
+                                    bg-purple-300
+                                    text-gray-800
+                                {% else %}
+                                    bg-blue-300
+                                {% endif %}
+                            ">
+                                {{message.message}}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <form class="mt-8 w-1/2 mx-auto" method="POST">
+                {% csrf_token %}
+                <input class="border-box mb-5" name="message" placeholder="Write a Message" required />
+                <button class="ml-6 btn w-6/12">Send</button>
+            </form>
+        </div>
+
+    </div>
+{% endblock content %} 
